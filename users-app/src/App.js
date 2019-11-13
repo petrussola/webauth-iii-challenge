@@ -24,15 +24,18 @@ function App(props) {
           return <Login {...props} />;
         }}
       />
-      <Route
-        path="/users"
-        render={props => {
-          return <Users {...props} />;
-        }}
-      />
+      <Route path="/users" render={props => withAuthCheck(Users, props)} />
       <Route path="/home" component={Home} />
     </div>
   );
+}
+
+function withAuthCheck(Component, props) {
+  if (localStorage.getItem("token")) {
+    return <Component {...props} />;
+  } else {
+    return <Redirect to="login" />;
+  }
 }
 
 export default withRouter(App);

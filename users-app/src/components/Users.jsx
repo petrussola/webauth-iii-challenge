@@ -13,7 +13,7 @@ export default function Users(props) {
       .catch(err => {
         debugger;
       });
-  }, [users]);
+  }, []);
   return (
     <div>
       {users.length === 0 ? (
