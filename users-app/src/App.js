@@ -4,6 +4,7 @@ import { Route, Link, withRouter, Redirect } from "react-router-dom";
 import Login from "./components/Login";
 import Users from "./components/Users";
 import Home from "./components/Home";
+import Register from "./components/Register";
 
 function App(props) {
   // LOGOUT FEATURE
@@ -17,7 +18,7 @@ function App(props) {
       <Link to="/register">Register</Link>
       <Link to="/login">Login</Link>
       <button onClick={logoutHandler}>Logout</button>
-
+      <Route path="/register" component={Register} />
       <Route
         path="/login"
         render={props => {
