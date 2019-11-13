@@ -5,7 +5,9 @@ module.exports = {
 };
 
 function findById(id) {
-  return db("users").where({ id });
+  return db("users")
+    .where({ id })
+    .first();
 }
 
 function insertUser(user) {
