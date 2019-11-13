@@ -6,7 +6,7 @@ module.exports = {
 };
 
 function findUserBy(filter) {
-  return db("users").where(filter).first();
+  return db("users").where(filter);
 }
 
 function insertUser(user) {
