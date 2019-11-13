@@ -1,15 +1,22 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, withRouter, Redirect } from "react-router-dom";
 
 import Login from "./components/Login";
 import Users from "./components/Users";
+import Home from "./components/Home";
 
-function App() {
+function App(props) {
+  // LOGOUT FEATURE
+  function logoutHandler(event) {
+    localStorage.clear();
+    props.history.push("/home");
+  }
+
   return (
     <div className="App">
       <Link to="/register">Register</Link>
       <Link to="/login">Login</Link>
-      <button>Logout</button>
+      <button onClick={logoutHandler}>Logout</button>
 
       <Route
         path="/login"
@@ -23,8 +30,9 @@ function App() {
           return <Users {...props} />;
         }}
       />
+      <Route path="/home" component={Home} />
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 
@@ -8,6 +8,7 @@ const initialValues = {
 };
 
 export default function Login(props) {
+  const [loginError, setLoginError] = useState();
   function onLoginHandler(formValues) {
     axios
       .post("http://localhost:5000/auth/login", formValues)
@@ -16,15 +17,18 @@ export default function Login(props) {
         props.history.push("/users");
       })
       .catch(error => {
-        debugger;
+        setLoginError(error.response.data.message);
       });
   }
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onLoginHandler}
-      component={LoginForm}
-    />
+    <div>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onLoginHandler}
+        component={LoginForm}
+      />
+      {loginError ? <div>{loginError}</div> : null}
+    </div>
   );
 }
 
